@@ -1,12 +1,12 @@
 Summary:	phpPgAdmin - web-based PostgreSQL administration
 Summary(pl):	phpPgAdmin - administracja bazami PostgreSQL przez WWW
 Name:		phpPgAdmin
-Version:	3.1
-Release:	2
+Version:	3.2
+Release:	1
 License:	GPL v2+
 Group:		Applications/Databases/Interfaces
 Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}.tar.bz2
-# Source0-md5:	b5c9added710f7831584196b8d3e4460
+# Source0-md5:	123b14bc75b810a61353df7fb9f93be8
 Source1:	%{name}.conf
 URL:		http://sourceforge.net/projects/phppgadmin/
 Requires:	php >= 4.0.6
@@ -38,7 +38,7 @@ przelaczniki, widoki i funkcje(zapisane procedury)
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_pgadmindir}/{classes/{HTML_TreeMenu/images,database},images/themes/default,lang/recoded,libraries/adodb/{datadict,drivers},sql,themes/default},/etc/{%{name},httpd/httpd.conf}}
 
-install *.php *.js			$RPM_BUILD_ROOT%{_pgadmindir}
+install *.php *.js *.txt		$RPM_BUILD_ROOT%{_pgadmindir}
 install classes/*.php			$RPM_BUILD_ROOT%{_pgadmindir}/classes
 install classes/HTML_TreeMenu/TreeMenu.* $RPM_BUILD_ROOT%{_pgadmindir}/classes/HTML_TreeMenu
 install classes/HTML_TreeMenu/images/*	$RPM_BUILD_ROOT%{_pgadmindir}/classes/HTML_TreeMenu/images
