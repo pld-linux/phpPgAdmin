@@ -15,7 +15,7 @@ Requires:	webserver
 Buildarch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_pgadmindir	/home/httpd/html/pgadmin
+%define		_pgadmindir	/home/services/httpd/html/pgadmin
 
 %description
 phpPgAdmin is a fully functional web-based administration utility for
