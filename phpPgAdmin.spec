@@ -19,38 +19,16 @@ BuildRoot: 	/tmp/%{name}-%{version}-root
 %define		_pgadmindir	/home/httpd/html/pgadmin
 
 %description
-phpPgAdmin can administer a whole PostgreSQL-server (needs a
-super-user) but also a single database. To accomplish the latter
-you'll need a properly set up PostgreSQL-user who can read/write only
-the desired database. It's up to you to look up the appropiate part in
-the PostgreSQL manual. Currently phpPgAdmin can:
-  - create and drop databases
-  - create, copy, drop and alter tables
-  - delete, edit and add fields
-  - execute any SQL-statement, even batch-queries
-  - manage keys on fields
-  - load text files into tables
-  - create (*) and read dumps of tables
-  - export (*) and import data to CSV values
-  - administer multiple servers and single databases
-  - communicate in more than 20 different languages
+phpPgAdmin is a fully functional web-based administration utility for a
+PostgreSQL database server. It handles all the basic functionality as well
+as some advanced features such as triggers, views and functions (stored
+procs)
 
 %description -l pl
-phpPgAdmin potrafi zarz±dzaæ ca³ymi bazami PostgreSQL (potrzebne
-uprawnienia super-user'a) jak i pojedynczymi bazami danych. Bêdziesz
-potrzebowa³ u¿ytkownika, który ma prawa zapisu/odczytu tylko tych baz,
-którymi chcesz administrowaæ (zajrzyj do odpowiedniej czê¶ci manual'a
-PostgreSQL). Aktualnie phpPgAdmin potrafi:
-  - tworzyæ i usuwaæ bazy
-  - create, copy, drop oraz alter na tabelach
-  - dodawaæ, usuwaæ i edytowaæ pola
-  - wykonywaæ dowolne zapytania SQL
-  - zarz±dzaæ kluczami na rekordach
-  - wczytywaæ tekst z plików do tabel
-  - obs³ugiwaæ ponad 20 jêzyków
-  - zarz±dzaæ wieloma serwerami i pojedyñczymi bazami danych
-  - eksportowaæ i importowaæ dane do warto¶ci CSV
-  - tworzyæ i czytaæ zrzuty tabel
+phpPgAdmin jest w pelni funkcjonalnym bazowanym na WWW narzedziem
+administracyjnym dla serwera baz danych PostgreSQL. Posiada wszystkie
+podstawowe mozliwosc, jak i czesc bardziej zaawansowanych jak przelaczniki,
+widoki i funkcje(zapisane procedury)
 
 %prep
 %setup -q -n phpPgAdmin
