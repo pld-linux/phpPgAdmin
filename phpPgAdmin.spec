@@ -56,7 +56,7 @@ install themes/default/*.css		$RPM_BUILD_ROOT%{_pgadmindir}/themes/default
 install conf/*.php			$RPM_BUILD_ROOT/etc/%{name}
 ln -s /etc/%{name}			$RPM_BUILD_ROOT%{_pgadmindir}/conf
 
-install %SOURCE1 			$RPM_BUILD_ROOT%{_config_http}/%{name}.conf
+install %{SOURCE1} 			$RPM_BUILD_ROOT%{_config_http}/%{name}.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
