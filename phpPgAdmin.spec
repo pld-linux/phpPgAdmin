@@ -1,12 +1,13 @@
 Summary:	phpPgAdmin - web-based PostgreSQL administration
 Summary(pl):	phpPgAdmin - administracja bazami PostgreSQL przez WWW
 Name:		phpPgAdmin
-Version:	3.0
+Version:	3.0.1
 Release:	0.1
 License:	GPL v2+
 Group:		Applications/Databases/Interfaces
 Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}.tar.bz2
-# Source0-md5:	c0e04a526c2d9e88f865f3a740f02b60
+# Source0-md5:	0a7ef2d4675e8800b3e02807cf1e3ac5
+Source1:	%{name}.conf
 URL:		http://sourceforge.net/projects/phppgadmin/
 Requires:	php >= 4.0.6
 Requires:	php-pcre
@@ -15,7 +16,7 @@ Requires:	webserver
 Buildarch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_pgadmindir	/home/services/httpd/html/pgadmin
+%define		_pgadmindir	%{_datadir}/%{name}
 
 %description
 phpPgAdmin is a fully functional web-based administration utility for
@@ -34,35 +35,54 @@ przelaczniki, widoki i funkcje(zapisane procedury)
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_pgadmindir}/{classes,conf,images,lang,libraries,sql,themes}
-install -d $RPM_BUILD_ROOT%{_pgadmindir}/classes/{HTML_TreeMenu/images,database}
-install -d $RPM_BUILD_ROOT%{_pgadmindir}/images/themes/default
-install -d $RPM_BUILD_ROOT%{_pgadmindir}/lang/recoded
-install -d $RPM_BUILD_ROOT%{_pgadmindir}/libraries/adodb/{datadict,drivers}
-install -d $RPM_BUILD_ROOT%{_pgadmindir}/themes/default
+install -d $RPM_BUILD_ROOT{%{_pgadmindir}/{classes/{HTML_TreeMenu/images,database},conf,images/themes/default,lang/recoded,libraries/adodb/{datadict,drivers},sql,themes/default},/etc/{%{name},httpd}}
 
-install *.php                            $RPM_BUILD_ROOT%{_pgadmindir}
-install classes/*.php                    $RPM_BUILD_ROOT%{_pgadmindir}/classes
+install *.php *.js			$RPM_BUILD_ROOT%{_pgadmindir}
+install classes/*.php			$RPM_BUILD_ROOT%{_pgadmindir}/classes
 install classes/HTML_TreeMenu/TreeMenu.* $RPM_BUILD_ROOT%{_pgadmindir}/classes/HTML_TreeMenu
-install classes/HTML_TreeMenu/images/*   $RPM_BUILD_ROOT%{_pgadmindir}/classes/HTML_TreeMenu/images
-install classes/database/*.php           $RPM_BUILD_ROOT%{_pgadmindir}/classes/database
-install conf/*.php                       $RPM_BUILD_ROOT%{_pgadmindir}/conf
-install images/themes/default/*.gif      $RPM_BUILD_ROOT%{_pgadmindir}/images/themes/default
-install lang/*.php                       $RPM_BUILD_ROOT%{_pgadmindir}/lang
-install lang/recoded/*.php               $RPM_BUILD_ROOT%{_pgadmindir}/lang/recoded
-install libraries/*.php                  $RPM_BUILD_ROOT%{_pgadmindir}/libraries
-install libraries/adodb/*.php            $RPM_BUILD_ROOT%{_pgadmindir}/libraries/adodb
-install libraries/adodb/datadict/*.php   $RPM_BUILD_ROOT%{_pgadmindir}/libraries/adodb/datadict
-install libraries/adodb/drivers/*.php    $RPM_BUILD_ROOT%{_pgadmindir}/libraries/adodb/drivers
-install sql/*.sql                        $RPM_BUILD_ROOT%{_pgadmindir}/sql
-install themes/default/*.css             $RPM_BUILD_ROOT%{_pgadmindir}/themes/default
+install classes/HTML_TreeMenu/images/*	$RPM_BUILD_ROOT%{_pgadmindir}/classes/HTML_TreeMenu/images
+install classes/database/*.php		$RPM_BUILD_ROOT%{_pgadmindir}/classes/database
+install images/themes/default/*.gif	$RPM_BUILD_ROOT%{_pgadmindir}/images/themes/default
+install lang/*.php			$RPM_BUILD_ROOT%{_pgadmindir}/lang
+install lang/recoded/*.php		$RPM_BUILD_ROOT%{_pgadmindir}/lang/recoded
+install libraries/*.php			$RPM_BUILD_ROOT%{_pgadmindir}/libraries
+#install libraries/adodb/*.php		$RPM_BUILD_ROOT%{_pgadmindir}/libraries/adodb
+#install libraries/adodb/datadict/*.php	$RPM_BUILD_ROOT%{_pgadmindir}/libraries/adodb/datadict
+#install libraries/adodb/drivers/*.php	$RPM_BUILD_ROOT%{_pgadmindir}/libraries/adodb/drivers
+install sql/*.sql			$RPM_BUILD_ROOT%{_pgadmindir}/sql
+install themes/default/*.css		$RPM_BUILD_ROOT%{_pgadmindir}/themes/default
+
+install conf/*.php			$RPM_BUILD_ROOT/etc/%{name}
+ln -s /etc/%{name}			$RPM_BUILD_ROOT%{_pgadmindir}/conf
+
+install %SOURCE1 			$RPM_BUILD_ROOT/etc/httpd/%{name}.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post
+if [ -f /etc/httpd/httpd.conf ] && ! grep -q "^Include.*phpPgAdmin.conf" /etc/httpd/httpd.conf; then
+        echo "Include /etc/httpd/phpPgAdmin.conf" >> /etc/httpd/httpd.conf
+fi
+if [ -f /var/lock/subsys/httpd ]; then
+	/usr/sbin/apachectl restart 1>&2
+fi
+
+%preun
+if [ "$1" = "0" ]; then
+	umask 027
+	grep -v "^Include.*phpPgAdmin.conf" /etc/httpd/httpd.conf > \
+                /etc/httpd/httpd.conf.tmp
+        mv -f /etc/httpd/httpd.conf.tmp /etc/httpd/httpd.conf
+	if [ -f /var/lock/subsys/httpd ]; then
+		/usr/sbin/apachectl restart 1>&2
+	fi
+fi
+
 %files
 %defattr(644,root,root,755)
-%doc BUGS CREDITS DEVELOPERS FAQ HISTORY INSTALL LICENSE TODO TRANSLATORS
-%dir %{_pgadmindir}
-%attr(640,root,http) %config(noreplace) %verify(not size mtime md5) %{_pgadmindir}/conf/config.inc.php
-%{_pgadmindir}/*
+%doc BUGS CREDITS DEVELOPERS FAQ HISTORY INSTALL TODO TRANSLATORS
+%dir /etc/%{name}
+%attr(640,root,http) %config(noreplace) %verify(not size mtime md5) /etc/%{name}/*
+%config(noreplace) %verify(not size mtime md5) /etc/httpd/%{name}.conf
+%{_pgadmindir}
