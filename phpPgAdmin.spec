@@ -1,5 +1,5 @@
-Summary:	phpPgAdmin - web-based MySQL administration
-Summary(pl):	phpPgAdmin - administracja bazami MySQL przez WWW
+Summary:	phpPgAdmin - web-based PostgreSQL administration
+Summary(pl):	phpPgAdmin - administracja bazami PostgreSQL przez WWW
 Name:		phpPgAdmin
 Version:	2.3.1
 Release:	1
