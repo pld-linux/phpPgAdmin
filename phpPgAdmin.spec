@@ -13,7 +13,7 @@ Requires:	php >= 4.0.6
 Requires:	php-pcre
 Requires:	php-pgsql >= 4.0.6
 Requires:	webserver
-Buildarch:	noarch
+BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pgadmindir	%{_datadir}/%{name}
