@@ -23,13 +23,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 phpPgAdmin is a fully functional web-based administration utility for
 a PostgreSQL database server. It handles all the basic functionality
 as well as some advanced features such as triggers, views and
-functions (stored procs)
+functions (stored procs).
 
 %description -l pl
-phpPgAdmin jest w pelni funkcjonalnym bazowanym na WWW narzedziem
+phpPgAdmin jest w pe³ni funkcjonalnym, bazowanym na WWW, narzêdziem
 administracyjnym dla serwera baz danych PostgreSQL. Posiada wszystkie
-podstawowe mozliwosc, jak i czesc bardziej zaawansowanych jak
-przelaczniki, widoki i funkcje(zapisane procedury)
+podstawowe mozliwo¶ci, jak i cze¶æ bardziej zaawansowanych jak
+prze³±czniki, widoki i funkcje (zapisane procedury).
 
 %prep
 %setup -q -n phpPgAdmin
