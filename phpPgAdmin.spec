@@ -28,8 +28,8 @@ functions (stored procs).
 %description -l pl
 phpPgAdmin jest w pe³ni funkcjonalnym, bazowanym na WWW, narzêdziem
 administracyjnym dla serwera baz danych PostgreSQL. Posiada wszystkie
-podstawowe mo¿liwo¶ci, jak i cze¶æ bardziej zaawansowanych jak
-prze³±czniki, widoki i funkcje (zapisane procedury).
+podstawowe mo¿liwo¶ci, jak i czê¶æ bardziej zaawansowanych jak
+prze³±czniki, widoki i funkcje (procedury sk³adowane).
 
 %prep
 %setup -q -n phpPgAdmin
