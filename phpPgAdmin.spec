@@ -1,7 +1,7 @@
 Summary:	phpPgAdmin - web-based PostgreSQL administration
 Summary(pl):	phpPgAdmin - administracja bazami PostgreSQL przez WWW
 Name:		phpPgAdmin
-Version:	2.4
+Version:	2.4a
 Release:	1
 License:	GPL v2
 Group:		Applications/Databases/Interfaces
