@@ -2,7 +2,7 @@ Summary:	phpPgAdmin - web-based PostgreSQL administration
 Summary(pl):	phpPgAdmin - administracja bazami PostgreSQL przez WWW
 Name:		phpPgAdmin
 Version:	3.0.1
-Release:	0.1
+Release:	1
 License:	GPL v2+
 Group:		Applications/Databases/Interfaces
 Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}.tar.bz2
@@ -35,7 +35,7 @@ przelaczniki, widoki i funkcje(zapisane procedury)
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_pgadmindir}/{classes/{HTML_TreeMenu/images,database},conf,images/themes/default,lang/recoded,libraries/adodb/{datadict,drivers},sql,themes/default},/etc/{%{name},httpd}}
+install -d $RPM_BUILD_ROOT{%{_pgadmindir}/{classes/{HTML_TreeMenu/images,database},images/themes/default,lang/recoded,libraries/adodb/{datadict,drivers},sql,themes/default},/etc/{%{name},httpd}}
 
 install *.php *.js			$RPM_BUILD_ROOT%{_pgadmindir}
 install classes/*.php			$RPM_BUILD_ROOT%{_pgadmindir}/classes
@@ -46,9 +46,9 @@ install images/themes/default/*.gif	$RPM_BUILD_ROOT%{_pgadmindir}/images/themes/
 install lang/*.php			$RPM_BUILD_ROOT%{_pgadmindir}/lang
 install lang/recoded/*.php		$RPM_BUILD_ROOT%{_pgadmindir}/lang/recoded
 install libraries/*.php			$RPM_BUILD_ROOT%{_pgadmindir}/libraries
-#install libraries/adodb/*.php		$RPM_BUILD_ROOT%{_pgadmindir}/libraries/adodb
-#install libraries/adodb/datadict/*.php	$RPM_BUILD_ROOT%{_pgadmindir}/libraries/adodb/datadict
-#install libraries/adodb/drivers/*.php	$RPM_BUILD_ROOT%{_pgadmindir}/libraries/adodb/drivers
+install libraries/adodb/*.php		$RPM_BUILD_ROOT%{_pgadmindir}/libraries/adodb
+install libraries/adodb/datadict/*.php	$RPM_BUILD_ROOT%{_pgadmindir}/libraries/adodb/datadict
+install libraries/adodb/drivers/*.php	$RPM_BUILD_ROOT%{_pgadmindir}/libraries/adodb/drivers
 install sql/*.sql			$RPM_BUILD_ROOT%{_pgadmindir}/sql
 install themes/default/*.css		$RPM_BUILD_ROOT%{_pgadmindir}/themes/default
 
