@@ -9,7 +9,6 @@ Group(de):	Applikationen/Dateibanken/Schnittstellen
 Group(pl):	Aplikacje/Bazy danych/Interfejsy
 Source0:	http://prdownloads.sourceforge.net/phppgadmin/%{name}_2-4.tar.bz2
 URL:		http://sourceforge.net/projects/phppgadmin/
-Requires:	postgresql
 Requires:	php >= 4.0.6
 Requires:	php-pgsql >= 4.0.6
 Requires:	webserver
