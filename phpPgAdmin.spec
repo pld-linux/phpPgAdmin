@@ -6,7 +6,7 @@ Version:	2.4.2
 Release:	1
 License:	GPL v2+
 Group:		Applications/Databases/Interfaces
-Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/phppgadmin/%{name}_%{tar_version}.tar.bz2
+Source0:	http://dl.sourceforge.net/phppgadmin/%{name}_%{tar_version}.tar.bz2
 URL:		http://sourceforge.net/projects/phppgadmin/
 Requires:	php >= 4.0.6
 Requires:	php-pcre
@@ -32,8 +32,6 @@ przelaczniki, widoki i funkcje(zapisane procedury)
 %prep
 %setup -q -n phpPgAdmin
 
-%build
-
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_pgadmindir}/{lang,images,libraries}
@@ -41,7 +39,6 @@ install -d $RPM_BUILD_ROOT%{_pgadmindir}/{lang,images,libraries}
 cp *.php *.html $RPM_BUILD_ROOT%{_pgadmindir}
 cp config.inc.php-dist $RPM_BUILD_ROOT%{_pgadmindir}/config.inc.php
 cp images/*.gif $RPM_BUILD_ROOT%{_pgadmindir}/images
-
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -51,7 +48,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc Documentation.html BUGS DEVELOPERS INSTALL README TODO ChangeLog
 %dir %{_pgadmindir}
 %attr(640,root,http) %config(noreplace) %verify(not size mtime md5) %{_pgadmindir}/config.inc.php
-%{_pgadmindir}/[^c]*.php
+%{_pgadmindir}/[!c]*.php
 %{_pgadmindir}/c[ah]*.php
 %{_pgadmindir}/*.html
 %{_pgadmindir}/images
