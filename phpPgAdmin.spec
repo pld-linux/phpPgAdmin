@@ -6,6 +6,7 @@ Version:	2.4.2
 Release:	1
 License:	GPL v2+
 Group:		Applications/Databases/Interfaces
+# Source0-md5:	e3af8a3aeea4ebdf153c5a3561228e33
 Source0:	http://dl.sourceforge.net/phppgadmin/%{name}_%{tar_version}.tar.bz2
 URL:		http://sourceforge.net/projects/phppgadmin/
 Requires:	php >= 4.0.6
