@@ -5,8 +5,6 @@ Version:	2.4a
 Release:	1
 License:	GPL v2
 Group:		Applications/Databases/Interfaces
-Group(de):	Applikationen/Dateibanken/Schnittstellen
-Group(pl):	Aplikacje/Bazy danych/Interfejsy
 Source0:	http://prdownloads.sourceforge.net/phppgadmin/%{name}_2-4.tar.bz2
 URL:		http://sourceforge.net/projects/phppgadmin/
 Requires:	php >= 4.0.6
