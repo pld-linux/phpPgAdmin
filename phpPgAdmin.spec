@@ -1,12 +1,12 @@
 Summary:	phpPgAdmin - web-based PostgreSQL administration
 Summary(pl):	phpPgAdmin - administracja bazami PostgreSQL przez WWW
 Name:		phpPgAdmin
-Version:	3.0.1
-Release:	1
+Version:	3.1
+Release:	0.rc1
 License:	GPL v2+
 Group:		Applications/Databases/Interfaces
-Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}.tar.bz2
-# Source0-md5:	0a7ef2d4675e8800b3e02807cf1e3ac5
+Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}-rc-1.tar.bz2
+# Source0-md5:	3bd68b3a79663787606da509663672b4
 Source1:	%{name}.conf
 URL:		http://sourceforge.net/projects/phppgadmin/
 Requires:	php >= 4.0.6
@@ -42,7 +42,7 @@ install classes/*.php			$RPM_BUILD_ROOT%{_pgadmindir}/classes
 install classes/HTML_TreeMenu/TreeMenu.* $RPM_BUILD_ROOT%{_pgadmindir}/classes/HTML_TreeMenu
 install classes/HTML_TreeMenu/images/*	$RPM_BUILD_ROOT%{_pgadmindir}/classes/HTML_TreeMenu/images
 install classes/database/*.php		$RPM_BUILD_ROOT%{_pgadmindir}/classes/database
-install images/themes/default/*.gif	$RPM_BUILD_ROOT%{_pgadmindir}/images/themes/default
+install images/themes/default/*.png	$RPM_BUILD_ROOT%{_pgadmindir}/images/themes/default
 install lang/*.php			$RPM_BUILD_ROOT%{_pgadmindir}/lang
 install lang/recoded/*.php		$RPM_BUILD_ROOT%{_pgadmindir}/lang/recoded
 install libraries/*.php			$RPM_BUILD_ROOT%{_pgadmindir}/libraries
