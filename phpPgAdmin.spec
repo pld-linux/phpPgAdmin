@@ -17,7 +17,7 @@ BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pgadmindir	%{_datadir}/%{name}
-%define		_config_http	/etc/httpd/httpd.conf
+%define		_config_http	/etc/httpd
 
 %description
 phpPgAdmin is a fully functional web-based administration utility for
@@ -62,14 +62,27 @@ install %SOURCE1 			$RPM_BUILD_ROOT%{_config_http}/%{name}.conf
 rm -rf $RPM_BUILD_ROOT
 
 %post
+if [ -f /etc/httpd/httpd.conf ] && ! grep -q "^Include.*%{name}.conf" /etc/httpd/httpd.conf; then
+	echo "Include /etc/httpd/%{name}.conf" >> /etc/httpd/httpd.conf
+elif [ -d /etc/httpd/httpd.conf ]; then
+	mv -f /etc/httpd/%{name}.conf /etc/httpd/httpd.conf/99_%{name}.conf
+fi
 if [ -f /var/lock/subsys/httpd ]; then
 	/usr/sbin/apachectl restart 1>&2
 fi
 
 %preun
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/httpd ]; then
-		/usr/sbin/apachectl restart 1>&2
+	umask 027
+	if [ -d /etc/httpd/httpd.conf ]; then
+	    rm -f /etc/httpd/httpd.conf/99_%{name}.conf
+	else
+		grep -v "^Include.*%{name}.conf" /etc/httpd/httpd.conf > \
+			etc/httpd/httpd.conf.tmp
+		mv -f /etc/httpd/httpd.conf.tmp /etc/httpd/httpd.conf
+		if [ -f /var/lock/subsys/httpd ]; then
+		    /usr/sbin/apachectl restart 1>&2
+		fi
 	fi
 fi
 
