@@ -1,12 +1,12 @@
 Summary:	phpPgAdmin - web-based PostgreSQL administration
 Summary(pl):	phpPgAdmin - administracja bazami PostgreSQL przez WWW
 Name:		phpPgAdmin
-Version:	3.5.1
-Release:	2
+Version:	3.5.2
+Release:	1
 License:	GPL v2+
 Group:		Applications/Databases/Interfaces
 Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}.tar.bz2
-# Source0-md5:	002ce3f34b06472eb1b35c8423b5b0e5
+# Source0-md5:	d23b84f9b3dece0a47537ac429bbf639
 Source1:	%{name}.conf
 URL:		http://sourceforge.net/projects/phppgadmin/
 Requires:	php >= 4.1
@@ -56,7 +56,7 @@ install sql/*.sql			$RPM_BUILD_ROOT%{_pgadmindir}/sql
 install themes/default/*.css		$RPM_BUILD_ROOT%{_pgadmindir}/themes/default
 # DONT MARK IT AS %DOC
 install	help/*.php			$RPM_BUILD_ROOT%{_pgadmindir}/help
-install conf/*.php			$RPM_BUILD_ROOT/etc/%{name}
+install conf/*				$RPM_BUILD_ROOT/etc/%{name}
 ln -s /etc/%{name}			$RPM_BUILD_ROOT%{_pgadmindir}/conf
 
 install %{SOURCE1} 			$RPM_BUILD_ROOT%{_config_http}/%{name}.conf
