@@ -6,7 +6,7 @@ Release:	1
 License:	GPL v2+
 Group:		Applications/Databases/Interfaces
 Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}.tar.bz2
-# Source0-md5:	26ff10b0bc1c4a313ddcf6e679cb4adf
+# Source0-md5:	6492cd318b8213a257571f0443e6c344
 Source1:	%{name}.conf
 URL:		http://sourceforge.net/projects/phppgadmin/
 Requires:	php >= 4.1
