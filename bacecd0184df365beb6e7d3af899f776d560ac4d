@@ -1,0 +1,3 @@
+- up to 4.0
+- simplified %install
+- C&P triggers' scripts from template-apache.spec
