@@ -5,11 +5,12 @@ Summary:	phpPgAdmin - web-based PostgreSQL administration
 Summary(pl):	phpPgAdmin - administracja bazami PostgreSQL przez WWW
 Name:		phpPgAdmin
 Version:	4.0.1
-Release:	1.9
+Release:	2
 License:	GPL v2+
 Group:		Applications/Databases/Interfaces
 Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}.tar.bz2
 # Source0-md5:	7e0c18a01538572d3c2b435725e68fe2
+Source1:	%{name}-apache.conf
 Patch0:		%{name}-config.patch
 URL:		http://phppgadmin.sourceforge.net/
 BuildRequires:	rpmbuild(macros) >= 1.264
@@ -43,10 +44,6 @@ prze³±czniki, widoki i funkcje (procedury sk³adowane).
 %patch0 -p1
 rm -f conf/config.inc.php-dist
 
-cat > apache.conf <<EOF
-Alias /pgadmin /usr/share/phpPgAdmin
-EOF
-
 # remove language source files (or one wants to make -devel subpackage?)
 mv -f lang/translations.php .
 rm -f lang/*.php
@@ -62,8 +59,8 @@ cp -a *.php *.txt *.js $RPM_BUILD_ROOT%{_appdir}
 cp -a classes help images lang libraries themes xloadtree $RPM_BUILD_ROOT%{_appdir}
 cp -a conf/*.php $RPM_BUILD_ROOT%{_sysconfdir}
 
-install apache.conf $RPM_BUILD_ROOT%{_sysconfdir}/apache.conf
-install apache.conf $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/apache.conf
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
 #install lighttpd.conf $RPM_BUILD_ROOT%{_sysconfdir}/lighttpd.conf
 
 %triggerin -- apache1
