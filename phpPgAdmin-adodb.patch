@@ -1,0 +1,14 @@
+use system adodb instead of bundled adodb-4.65
+
+diff -ur phpPgAdmin-4.0.1/classes/database/ADODB_base.php phpPgAdmin-4.0.1.adodb/classes/database/ADODB_base.php
+--- phpPgAdmin-4.0.1/classes/database/ADODB_base.php	2005-05-25 07:33:23.000000000 +0300
++++ phpPgAdmin-4.0.1.adodb/classes/database/ADODB_base.php	2006-03-12 19:41:11.000000000 +0200
+@@ -7,7 +7,7 @@
+  */
+ 
+ include_once('./libraries/errorhandler.inc.php');
+-include_once('./libraries/adodb/adodb.inc.php');
++include_once('/usr/share/php/adodb/adodb.inc.php');
+ 
+ class ADODB_base {
+ 
