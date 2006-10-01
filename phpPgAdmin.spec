@@ -5,14 +5,15 @@ Summary:	phpPgAdmin - web-based PostgreSQL administration
 Summary(pl):	phpPgAdmin - administracja bazami PostgreSQL przez WWW
 Name:		phpPgAdmin
 Version:	4.0.1
-Release:	1.9
+Release:	5
 License:	GPL v2+
 Group:		Applications/Databases/Interfaces
 Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}.tar.bz2
 # Source0-md5:	7e0c18a01538572d3c2b435725e68fe2
+Source1:	%{name}-apache.conf
 Patch0:		%{name}-config.patch
 URL:		http://phppgadmin.sourceforge.net/
-BuildRequires:	rpmbuild(macros) >= 1.264
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(triggerpostun):	sed >= 4.0
 Requires:	php >= 3:4.1
 Requires:	php-pcre
@@ -43,10 +44,6 @@ prze³±czniki, widoki i funkcje (procedury sk³adowane).
 %patch0 -p1
 rm -f conf/config.inc.php-dist
 
-cat > apache.conf <<EOF
-Alias /pgadmin /usr/share/phpPgAdmin
-EOF
-
 # remove language source files (or one wants to make -devel subpackage?)
 mv -f lang/translations.php .
 rm -f lang/*.php
@@ -62,8 +59,8 @@ cp -a *.php *.txt *.js $RPM_BUILD_ROOT%{_appdir}
 cp -a classes help images lang libraries themes xloadtree $RPM_BUILD_ROOT%{_appdir}
 cp -a conf/*.php $RPM_BUILD_ROOT%{_sysconfdir}
 
-install apache.conf $RPM_BUILD_ROOT%{_sysconfdir}/apache.conf
-install apache.conf $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/apache.conf
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
 #install lighttpd.conf $RPM_BUILD_ROOT%{_sysconfdir}/lighttpd.conf
 
 %triggerin -- apache1
@@ -72,10 +69,10 @@ install apache.conf $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
 %triggerun -- apache1
 %webapp_unregister apache %{_webapp}
 
-%triggerin -- apache >= 2.0.0
+%triggerin -- apache < 2.2.0, apache-base
 %webapp_register httpd %{_webapp}
 
-%triggerun -- apache >= 2.0.0
+%triggerun -- apache < 2.2.0, apache-base
 %webapp_unregister httpd %{_webapp}
 
 #%%triggerin -- lighttpd
@@ -133,14 +130,10 @@ if [ -L /etc/httpd/httpd.conf/99_phpPgAdmin.conf ]; then
 fi
 
 if [ "$httpd_reload" ]; then
-	if [ -f /var/lock/subsys/httpd ]; then
-		/etc/rc.d/init.d/httpd reload 1>&2
-	fi
+	%service httpd reload
 fi
 if [ "$apache_reload" ]; then
-	if [ -f /var/lock/subsys/apache ]; then
-		/etc/rc.d/init.d/apache reload 1>&2
-	fi
+	%service apache reload
 fi
 
 %clean
