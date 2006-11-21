@@ -1,25 +1,26 @@
 # TODO
-# - separate internal files (classes, libraries) and public files (.js, .css, index.php) to htdocs and above and point docroot to htdocs dir
+# - separate internal files (classes, libraries) and public files (.js, .css,
+#   index.php) to htdocs and above and point docroot to htdocs dir
 Summary:	phpPgAdmin - web-based PostgreSQL administration
 Summary(pl):	phpPgAdmin - administracja bazami PostgreSQL przez WWW
 Name:		phpPgAdmin
 Version:	4.0.1
-Release:	4.2
+Release:	5
 License:	GPL v2+
 Group:		Applications/Databases/Interfaces
 Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}.tar.bz2
 # Source0-md5:	7e0c18a01538572d3c2b435725e68fe2
 Source1:	%{name}-apache.conf
 Patch0:		%{name}-config.patch
-#Patch1:		%{name}-adodb.patch
+#Patch1:	%{name}-adodb.patch
 URL:		http://phppgadmin.sourceforge.net/
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(triggerpostun):	sed >= 4.0
 #Requires:	adodb >= 4.67-1.17
-Requires:	php >= 3:4.1
-Requires:	php-pcre
-Requires:	php-pgsql >= 3:4.1
+Requires:	php(pcre)
+Requires:	php(pgsql)
 Requires:	webapps
+Requires:	webserver(php) >= 4.1
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
