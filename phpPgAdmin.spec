@@ -2,7 +2,7 @@
 # - separate internal files (classes, libraries) and public files (.js, .css,
 #   index.php) to htdocs and above and point docroot to htdocs dir
 Summary:	phpPgAdmin - web-based PostgreSQL administration
-Summary(pl):	phpPgAdmin - administracja bazami PostgreSQL przez WWW
+Summary(pl.UTF-8):   phpPgAdmin - administracja bazami PostgreSQL przez WWW
 Name:		phpPgAdmin
 Version:	4.0.1
 Release:	6
@@ -35,11 +35,11 @@ a PostgreSQL database server. It handles all the basic functionality
 as well as some advanced features such as triggers, views and
 functions (stored procs).
 
-%description -l pl
-phpPgAdmin jest w pe³ni funkcjonalnym, bazowanym na WWW, narzêdziem
+%description -l pl.UTF-8
+phpPgAdmin jest w peÅ‚ni funkcjonalnym, bazowanym na WWW, narzÄ™dziem
 administracyjnym dla serwera baz danych PostgreSQL. Posiada wszystkie
-podstawowe mo¿liwo¶ci, jak i czê¶æ bardziej zaawansowanych jak
-prze³±czniki, widoki i funkcje (procedury sk³adowane).
+podstawowe moÅ¼liwoÅ›ci, jak i czÄ™Å›Ä‡ bardziej zaawansowanych jak
+przeÅ‚Ä…czniki, widoki i funkcje (procedury skÅ‚adowane).
 
 %prep
 %setup -q
