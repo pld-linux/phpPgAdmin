@@ -2,7 +2,7 @@
 # - separate internal files (classes, libraries) and public files (.js, .css,
 #   index.php) to htdocs and above and point docroot to htdocs dir
 Summary:	phpPgAdmin - web-based PostgreSQL administration
-Summary(pl.UTF-8):   phpPgAdmin - administracja bazami PostgreSQL przez WWW
+Summary(pl.UTF-8):	phpPgAdmin - administracja bazami PostgreSQL przez WWW
 Name:		phpPgAdmin
 Version:	4.0.1
 Release:	6
