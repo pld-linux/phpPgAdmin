@@ -97,9 +97,10 @@ if [ -f /etc/httpd/httpd.conf ]; then
 	httpd_reload=1
 fi
 
+# change config version number for 4.1.2
 if [ -f /etc/webapps/phpPgAdmin/config.inc.php ]; then
 	echo "Adjusting configuration for phpPgAdmin 4.1.2"
-	sed -i -e 's@15;@17;@g' /etc/webapps/phpPgAdmin/config.inc.php
+	sed -i -e '/conf.*version/s/[0-9][0-9][\t ]*;/17;/' /etc/webapps/phpPgAdmin/config.inc.php
 fi
 
 # migrate from httpd (apache2) config dir
