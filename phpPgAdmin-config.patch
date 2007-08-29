@@ -39,23 +39,3 @@
  	// Application name 
  	$appName = 'phpPgAdmin';
 
---- phpPgAdmin-4.1.2/libraries/lib.inc.php	2007-06-11 21:20:50.321736338 +0200
-+++ phpPgAdmin-4.1.2/libraries/lib.inc.php-new	2007-06-11 21:28:43.458844982 +0200
-@@ -6,6 +6,9 @@
- 	 * $Id$
- 	 */
- 
-+	// Prevent XSS attacks
-+	$PHP_SELF = htmlspecialchars($_SERVER['PHP_SELF']);
-+
- 	include_once('./libraries/decorator.inc.php');
- 	include_once('./lang/translations.php');
- 	
-@@ -220,7 +223,4 @@
- 		}
- 	}
- 
--	// Prevent XSS attacks
--    $PHP_SELF = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, $lang['appcharset']);
--
- ?>
