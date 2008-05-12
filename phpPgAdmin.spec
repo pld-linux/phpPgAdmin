@@ -11,6 +11,7 @@ Group:		Applications/Databases/Interfaces
 Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}.tar.bz2
 # Source0-md5:	8107664997067bc02a6f3d65ad958d2c
 Source1:	%{name}-apache.conf
+Source2:	%{name}-lighttpd.conf
 Patch0:		%{name}-config.patch
 #Patch1:	%{name}-adodb.patch
 URL:		http://phppgadmin.sourceforge.net/
@@ -64,7 +65,7 @@ cp -a conf/*.php $RPM_BUILD_ROOT%{_sysconfdir}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/apache.conf
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
-#install lighttpd.conf $RPM_BUILD_ROOT%{_sysconfdir}/lighttpd.conf
+install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/lighttpd.conf
 
 %triggerin -- apache1 < 1.3.37-3, apache1-base
 %webapp_register apache %{_webapp}
@@ -78,11 +79,11 @@ install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
 %triggerun -- apache < 2.2.0, apache-base
 %webapp_unregister httpd %{_webapp}
 
-#%%triggerin -- lighttpd
-#%%webapp_register lighttpd %{_webapp}
-#
-#%%triggerun -- lighttpd
-#%%webapp_unregister lighttpd %{_webapp}
+%triggerin -- lighttpd
+%webapp_register lighttpd %{_webapp}
+
+%triggerun -- lighttpd
+%webapp_unregister lighttpd %{_webapp}
 
 %triggerpostun -- %{name} < 4.0.1-1.2
 # rescue app config
@@ -155,7 +156,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %attr(750,root,http) %{_sysconfdir}
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/apache.conf
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf
-#%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/lighttpd.conf
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/lighttpd.conf
 %attr(640,root,http) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.php
 
 %{_appdir}
