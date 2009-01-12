@@ -4,12 +4,12 @@
 Summary:	phpPgAdmin - web-based PostgreSQL administration
 Summary(pl.UTF-8):	phpPgAdmin - administracja bazami PostgreSQL przez WWW
 Name:		phpPgAdmin
-Version:	4.2.1
+Version:	4.2.2
 Release:	1
 License:	GPL v2+
 Group:		Applications/Databases/Interfaces
 Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}.tar.bz2
-# Source0-md5:	0c61912436403b52860beafa3722d5f8
+# Source0-md5:	7716bd0b1afa8468e22b641bba8faa65
 Source1:	%{name}-apache.conf
 Source2:	%{name}-lighttpd.conf
 Patch0:		%{name}-config.patch
