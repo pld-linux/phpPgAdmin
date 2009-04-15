@@ -1,0 +1,59 @@
+diff -ur phpPgAdmin-4.2.2.orig/classes/database/Postgres.php phpPgAdmin-4.2.2/classes/database/Postgres.php
+--- phpPgAdmin-4.2.2.orig/classes/database/Postgres.php	2008-12-18 06:28:57.000000000 +0100
++++ phpPgAdmin-4.2.2/classes/database/Postgres.php	2009-01-12 23:28:00.000000000 +0100
+@@ -320,6 +320,14 @@
+ 				echo htmlspecialchars($value);
+ 				echo "</textarea>\n";
+ 				break;
++			case 'date':
++				$showsTime='false'; $timeFormat='';
++			case 'timestamp':
++				if(!isset($showsTime)) { $showsTime='true'; $timeFormat=' %H:%M:%S'; }
++				echo "<input name=\"", htmlspecialchars($name), "\" value=\"", htmlspecialchars($value), "\" size=\"35\"{$action_str} {$szExtra} id=\"", htmlspecialchars($name), "\"/>\n";
++				echo "<button type=\"button\" onclick=\"return false\" id=\"trigger", htmlspecialchars($name), "\">...</button>";
++				echo "<script type=\"text/javascript\">Calendar.setup( { inputField: \"", htmlspecialchars($name), "\", button: \"trigger", htmlspecialchars($name), "\", showsTime: $showsTime, ifFormat: \"%Y-%m-%d$timeFormat\" }); </script>";
++				break;
+ 			default:
+ 				echo "<input name=\"", htmlspecialchars($name), "\" value=\"", htmlspecialchars($value), "\" size=\"35\"{$action_str} {$szExtra} />\n";
+ 				break;
+diff -ur phpPgAdmin-4.2.2.orig/classes/Misc.php phpPgAdmin-4.2.2/classes/Misc.php
+--- phpPgAdmin-4.2.2.orig/classes/Misc.php	2008-12-18 06:28:57.000000000 +0100
++++ phpPgAdmin-4.2.2/classes/Misc.php	2009-04-13 17:22:01.000000000 +0200
+@@ -374,6 +374,12 @@
+ 				echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset={$lang['appcharset']}\" />\n";
+ 				// Theme
+ 				echo "<link rel=\"stylesheet\" href=\"themes/{$conf['theme']}/global.css\" type=\"text/css\" />\n";
++?>
++<link rel="stylesheet" href="libraries/calendar/skins/aqua/theme.css" type="text/css" />
++<script src="libraries/calendar/calendar.js" type="text/javascript"></script>
++<script src="libraries/calendar/lang/calendar-en.js" type="text/javascript"></script>
++<script src="libraries/calendar/calendar-setup.js" type="text/javascript"></script>
++<?php
+ 				echo "<link rel=\"shortcut icon\" href=\"images/themes/{$conf['theme']}/Favicon.ico\" type=\"image/vnd.microsoft.icon\" />\n";
+ 				echo "<link rel=\"icon\" type=\"image/png\" href=\"images/themes/{$conf['theme']}/Introduction.png\" />\n";
+ 				echo "<title>", htmlspecialchars($appName);
+diff -ur phpPgAdmin-4.2.2.orig/display.php phpPgAdmin-4.2.2/display.php
+--- phpPgAdmin-4.2.2.orig/display.php	2008-12-18 06:28:57.000000000 +0100
++++ phpPgAdmin-4.2.2/display.php	2009-03-01 14:15:00.000000000 +0100
+@@ -73,6 +73,7 @@
+ 				echo "<th class=\"data\">{$lang['strnull']}</th><th class=\"data\">{$lang['strvalue']}</th></tr>";
+ 
+ 				$i = 0;
++				$shift=0;
+ 				while (!$attrs->EOF) {
+ 					$szValueName = "values[{$attrs->fields['attname']}]";
+ 					$szEvents = '';
+@@ -127,11 +128,12 @@
+ 					// as it contains '[' and ']' characters.
+ 					if (!$attrs->fields['attnotnull']) {
+ 						echo $data->printField($szValueName, $rs->fields[$attrs->fields['attname']], $attrs->fields['type'], 
+-													array('onChange' => 'elements[' . ($elements - 1) . '].checked = false;'),$szEvents) . $szDivPH;
++													array('onChange' => 'elements[' . ($elements - 1 + $shift) . '].checked = false;'),$szEvents) . $szDivPH;
+ 					}
+ 					else {
+ 						echo $data->printField($szValueName, $rs->fields[$attrs->fields['attname']], $attrs->fields['type'],array(),$szEvents) . $szDivPH;
+ 					}
++					if (in_array(substr($attrs->fields['type'],0,9),array('date','timestamp'))) $shift++;
+ 					echo "</td>";
+ 					$elements++;
+ 					echo "</tr>\n";
