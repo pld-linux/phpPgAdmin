@@ -12,8 +12,11 @@ Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}.tar.bz2
 # Source0-md5:	7716bd0b1afa8468e22b641bba8faa65
 Source1:	%{name}-apache.conf
 Source2:	%{name}-lighttpd.conf
+Source3:	http://www.quarto.pl/~gotar/%{name}-jscalendar.tar.bz2
+# Source3-md5:	84115f772a723cc742352c589df9af29
 Patch0:		%{name}-config.patch
 #Patch1:	%{name}-adodb.patch
+Patch2:		%{name}-calendar.patch
 URL:		http://phppgadmin.sourceforge.net/
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(triggerpostun):	sed >= 4.0
@@ -43,9 +46,10 @@ podstawowe możliwości, jak i część bardziej zaawansowanych jak
 przełączniki, widoki i funkcje (procedury składowane).
 
 %prep
-%setup -q
+%setup -q -a3
 %patch0 -p1
 #%patch1 -p1
+%patch2 -p1
 rm -f conf/config.inc.php-dist
 
 # remove language source files (or one wants to make -devel subpackage?)
