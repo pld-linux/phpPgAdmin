@@ -23,6 +23,7 @@ Requires(triggerpostun):	sed >= 4.0
 #Requires:	adodb >= 4.67-1.17
 Requires:	php(pcre)
 Requires:	php(pgsql)
+Requires:	php(session)
 Requires:	webapps
 Requires:	webserver(php) >= 4.1
 BuildArch:	noarch
