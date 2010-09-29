@@ -25,7 +25,7 @@ Requires:	php(pcre)
 Requires:	php(pgsql)
 Requires:	php(session)
 Requires:	webapps
-Requires:	webserver(php) >= 4.1
+Requires:	webserver(php) >= 5.0
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -38,7 +38,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 phpPgAdmin is a fully functional web-based administration utility for
 a PostgreSQL database server. It handles all the basic functionality
 as well as some advanced features such as triggers, views and
-functions (stored procs).
+functions (stored procedures).
 
 %description -l pl.UTF-8
 phpPgAdmin jest w pełni funkcjonalnym, bazowanym na WWW, narzędziem
