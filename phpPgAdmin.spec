@@ -4,12 +4,12 @@
 Summary:	phpPgAdmin - web-based PostgreSQL administration
 Summary(pl.UTF-8):	phpPgAdmin - administracja bazami PostgreSQL przez WWW
 Name:		phpPgAdmin
-Version:	4.2.3
-Release:	1
+Version:	5.0
+Release:	0.2
 License:	GPL v2+
 Group:		Applications/Databases/Interfaces
-Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}.tar.bz2
-# Source0-md5:	29ce16a331bf2ca4f6d924fe35d4ada1
+Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}-beta1.tar.bz2
+# Source0-md5:	7d026386eb3320be583f3710f3482eda
 Source1:	%{name}-apache.conf
 Source2:	%{name}-lighttpd.conf
 Source3:	http://www.quarto.pl/~gotar/%{name}-jscalendar.tar.bz2
@@ -47,11 +47,12 @@ podstawowe możliwości, jak i część bardziej zaawansowanych jak
 przełączniki, widoki i funkcje (procedury składowane).
 
 %prep
-%setup -q -a3
+%setup -q -a3 -n %{name}-%{version}-beta1
 %patch0 -p1
 #%patch1 -p1
 %patch2 -p1
 mv conf/config.inc.php{-dist,}
+find . -name \*.orig -exec rm -f \{\} \;
 
 # remove language source files (or one wants to make -devel subpackage?)
 mv -f lang/translations.php .
@@ -65,7 +66,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_appdir},%{_sysconfdir}}
 
 cp -a *.php *.txt *.js $RPM_BUILD_ROOT%{_appdir}
-cp -a classes help images lang libraries themes xloadtree $RPM_BUILD_ROOT%{_appdir}
+cp -a classes help images js lang libraries themes xloadtree $RPM_BUILD_ROOT%{_appdir}
 cp -a conf/*.php $RPM_BUILD_ROOT%{_sysconfdir}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/apache.conf

@@ -1,7 +1,7 @@
 diff -ur phpPgAdmin-4.2.2.orig/classes/database/Postgres.php phpPgAdmin-4.2.2/classes/database/Postgres.php
 --- phpPgAdmin-4.2.2.orig/classes/database/Postgres.php	2008-12-18 06:28:57.000000000 +0100
-+++ phpPgAdmin-4.2.2/classes/database/Postgres.php	2009-01-12 23:28:00.000000000 +0100
-@@ -320,6 +320,14 @@
++++ phpPgAdmin-4.2.2/classes/database/Postgres.php	2010-09-30 01:01:41.000000000 +0200
+@@ -303,6 +303,14 @@ class Postgres extends ADODB_base {
  				echo htmlspecialchars($value);
  				echo "</textarea>\n";
  				break;
@@ -14,7 +14,7 @@ diff -ur phpPgAdmin-4.2.2.orig/classes/database/Postgres.php phpPgAdmin-4.2.2/cl
 +				echo "<script type=\"text/javascript\">Calendar.setup( { inputField: \"", htmlspecialchars($name), "\", button: \"trigger", htmlspecialchars($name), "\", showsTime: $showsTime, ifFormat: \"%Y-%m-%d$timeFormat\" }); </script>";
 +				break;
  			default:
- 				echo "<input name=\"", htmlspecialchars($name), "\" value=\"", htmlspecialchars($value), "\" size=\"35\"{$action_str} {$szExtra} />\n";
+ 				echo "<input name=\"", htmlspecialchars($name), "\" value=\"", htmlspecialchars($value), "\" size=\"35\"{$action_str} {$extra} />\n";
  				break;
 diff -ur phpPgAdmin-4.2.2.orig/classes/Misc.php phpPgAdmin-4.2.2/classes/Misc.php
 --- phpPgAdmin-4.2.2.orig/classes/Misc.php	2008-12-18 06:28:57.000000000 +0100
