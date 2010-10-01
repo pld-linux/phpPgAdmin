@@ -1,7 +1,7 @@
 diff -ur phpPgAdmin-4.2.2.orig/classes/database/Postgres.php phpPgAdmin-4.2.2/classes/database/Postgres.php
 --- phpPgAdmin-4.2.2.orig/classes/database/Postgres.php	2008-12-18 06:28:57.000000000 +0100
 +++ phpPgAdmin-4.2.2/classes/database/Postgres.php	2010-09-30 01:01:41.000000000 +0200
-@@ -303,6 +303,14 @@ class Postgres extends ADODB_base {
+@@ -302,6 +302,14 @@ class Postgres extends ADODB_base {
  				echo htmlspecialchars($value);
  				echo "</textarea>\n";
  				break;
@@ -14,12 +14,12 @@ diff -ur phpPgAdmin-4.2.2.orig/classes/database/Postgres.php phpPgAdmin-4.2.2/cl
 +				echo "<script type=\"text/javascript\">Calendar.setup( { inputField: \"", htmlspecialchars($name), "\", button: \"trigger", htmlspecialchars($name), "\", showsTime: $showsTime, ifFormat: \"%Y-%m-%d$timeFormat\" }); </script>";
 +				break;
  			default:
- 				echo "<input name=\"", htmlspecialchars($name), "\" value=\"", htmlspecialchars($value), "\" size=\"35\"{$action_str} {$extra} />\n";
+ 				echo "<input name=\"", htmlspecialchars($name), "\" value=\"", htmlspecialchars($value), "\" size=\"35\"{$extra_str} />\n";
  				break;
 diff -ur phpPgAdmin-4.2.2.orig/classes/Misc.php phpPgAdmin-4.2.2/classes/Misc.php
 --- phpPgAdmin-4.2.2.orig/classes/Misc.php	2008-12-18 06:28:57.000000000 +0100
 +++ phpPgAdmin-4.2.2/classes/Misc.php	2009-04-13 17:22:01.000000000 +0200
-@@ -374,6 +374,12 @@
+@@ -395,6 +395,12 @@
  				echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset={$lang['appcharset']}\" />\n";
  				// Theme
  				echo "<link rel=\"stylesheet\" href=\"themes/{$conf['theme']}/global.css\" type=\"text/css\" />\n";
@@ -34,25 +34,28 @@ diff -ur phpPgAdmin-4.2.2.orig/classes/Misc.php phpPgAdmin-4.2.2/classes/Misc.ph
  				echo "<title>", htmlspecialchars($appName);
 diff -ur phpPgAdmin-4.2.2.orig/display.php phpPgAdmin-4.2.2/display.php
 --- phpPgAdmin-4.2.2.orig/display.php	2008-12-18 06:28:57.000000000 +0100
-+++ phpPgAdmin-4.2.2/display.php	2009-03-01 14:15:00.000000000 +0100
-@@ -73,6 +73,7 @@
++++ phpPgAdmin-4.2.2/display.php	2010-10-02 01:41:27.000000000 +0200
+@@ -61,6 +61,7 @@
  				echo "<th class=\"data\">{$lang['strnull']}</th><th class=\"data\">{$lang['strvalue']}</th></tr>";
  
  				$i = 0;
 +				$shift=0;
  				while (!$attrs->EOF) {
- 					$szValueName = "values[{$attrs->fields['attname']}]";
- 					$szEvents = '';
-@@ -127,11 +128,12 @@
+ 
+ 					$attrs->fields['attnotnull'] = $data->phpBool($attrs->fields['attnotnull']);
+@@ -106,7 +107,7 @@
+ 					// keep track of which element offset we're up to.  We can't refer to the null checkbox by name
  					// as it contains '[' and ']' characters.
  					if (!$attrs->fields['attnotnull']) {
- 						echo $data->printField($szValueName, $rs->fields[$attrs->fields['attname']], $attrs->fields['type'], 
--													array('onChange' => 'elements[' . ($elements - 1) . '].checked = false;'),$szEvents) . $szDivPH;
-+													array('onChange' => 'elements[' . ($elements - 1 + $shift) . '].checked = false;'),$szEvents) . $szDivPH;
+-						$extras['onChange'] = 'elements[' . ($elements - 1) . '].checked = false;';
++						$extras['onChange'] = 'elements[' . ($elements - 1 + $shift) . '].checked = false;';
  					}
- 					else {
- 						echo $data->printField($szValueName, $rs->fields[$attrs->fields['attname']], $attrs->fields['type'],array(),$szEvents) . $szDivPH;
- 					}
+ 
+ 					if (($fksprops !== false) && isset($fksprops['byfield'][$attrs->fields['attnum']])) {
+@@ -116,6 +117,7 @@
+ 
+ 					echo $data->printField("values[{$attrs->fields['attnum']}]", $rs->fields[$attrs->fields['attname']], $attrs->fields['type'], $extras);
+ 
 +					if (in_array(substr($attrs->fields['type'],0,9),array('date','timestamp'))) $shift++;
  					echo "</td>";
  					$elements++;

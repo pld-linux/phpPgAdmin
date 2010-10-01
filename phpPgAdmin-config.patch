@@ -1,6 +1,6 @@
 --- phpPgAdmin-4.0.1/libraries/lib.inc.php~	2005-12-02 17:19:47.000000000 +0200
 +++ phpPgAdmin-4.0.1/libraries/lib.inc.php	2005-12-02 17:24:01.259851274 +0200
-@@ -26,12 +26,12 @@
+@@ -27,12 +27,12 @@
  		exit(sprintf('Version of PHP not supported. Please upgrade to version %s or later.', $phpMinVer));
  
  	// Check to see if the configuration file exists, if not, explain
@@ -29,13 +29,12 @@
  
 --- phpPgAdmin-4.0.1/libraries/lib.inc.php	2005-12-02 17:38:56.000000000 +0200
 +++ phpPgAdmin-4.0.1-org/libraries/lib.inc.php	2005-12-02 17:37:20.000000000 +0200
-@@ -9,7 +9,7 @@
+@@ -10,7 +10,7 @@
  	include_once('./lang/translations.php');
- 	
+ 
  	// Set error reporting level to max
 -	error_reporting(E_ALL);
 +	error_reporting(E_ALL & ~E_NOTICE);
- 	ini_set('display_errors', 'on');
- 
- 	// Application name 
-
+  
+ 	// Application name
+ 	$appName = 'phpPgAdmin';

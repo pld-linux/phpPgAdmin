@@ -8,8 +8,8 @@ Version:	5.0
 Release:	0.2
 License:	GPL v2+
 Group:		Applications/Databases/Interfaces
-Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}-beta1.tar.bz2
-# Source0-md5:	7d026386eb3320be583f3710f3482eda
+Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}-beta2.tar.bz2
+# Source0-md5:	739247e0334a44ea4ee2c1754b7b1119
 Source1:	%{name}-apache.conf
 Source2:	%{name}-lighttpd.conf
 Source3:	http://www.quarto.pl/~gotar/%{name}-jscalendar.tar.bz2
@@ -47,7 +47,7 @@ podstawowe możliwości, jak i część bardziej zaawansowanych jak
 przełączniki, widoki i funkcje (procedury składowane).
 
 %prep
-%setup -q -a3 -n %{name}-%{version}-beta1
+%setup -q -a3 -n %{name}-%{version}-beta2
 %patch0 -p1
 #%patch1 -p1
 %patch2 -p1
