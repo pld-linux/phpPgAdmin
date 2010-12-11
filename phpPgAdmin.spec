@@ -5,11 +5,11 @@ Summary:	phpPgAdmin - web-based PostgreSQL administration
 Summary(pl.UTF-8):	phpPgAdmin - administracja bazami PostgreSQL przez WWW
 Name:		phpPgAdmin
 Version:	5.0
-Release:	0.2
+Release:	1
 License:	GPL v2+
 Group:		Applications/Databases/Interfaces
-Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}-beta2.tar.bz2
-# Source0-md5:	739247e0334a44ea4ee2c1754b7b1119
+Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}.tar.bz2
+# Source0-md5:	d76081a0aa7b0d63c2bbf8806f8b7906
 Source1:	%{name}-apache.conf
 Source2:	%{name}-lighttpd.conf
 Source3:	http://www.quarto.pl/~gotar/%{name}-jscalendar.tar.bz2
@@ -47,7 +47,7 @@ podstawowe możliwości, jak i część bardziej zaawansowanych jak
 przełączniki, widoki i funkcje (procedury składowane).
 
 %prep
-%setup -q -a3 -n %{name}-%{version}-beta2
+%setup -q -a3
 %patch0 -p1
 #%patch1 -p1
 %patch2 -p1
