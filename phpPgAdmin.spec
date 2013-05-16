@@ -5,7 +5,7 @@ Summary:	phpPgAdmin - web-based PostgreSQL administration
 Summary(pl.UTF-8):	phpPgAdmin - administracja bazami PostgreSQL przez WWW
 Name:		phpPgAdmin
 Version:	5.0.3
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Applications/Databases/Interfaces
 Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}.tar.bz2
@@ -14,6 +14,7 @@ Source1:	%{name}-apache.conf
 Source2:	%{name}-lighttpd.conf
 Source3:	http://www.quarto.pl/~gotar/%{name}-jscalendar.tar.bz2
 # Source3-md5:	84115f772a723cc742352c589df9af29
+Source4:	%{name}-httpd.conf
 Patch0:		%{name}-config.patch
 #Patch1:	%{name}-adodb.patch
 Patch2:		%{name}-calendar.patch
@@ -26,6 +27,7 @@ Requires:	php(pgsql)
 Requires:	php(session)
 Requires:	webapps
 Requires:	webserver(php) >= 5.0
+Conflicts:	apache-base < 2.4.0-1
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -70,7 +72,7 @@ cp -a classes help images js lang libraries themes xloadtree $RPM_BUILD_ROOT%{_a
 cp -a conf/*.php $RPM_BUILD_ROOT%{_sysconfdir}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/apache.conf
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
+install %{SOURCE4} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/lighttpd.conf
 
 %triggerin -- apache1 < 1.3.37-3, apache1-base
@@ -79,10 +81,10 @@ install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/lighttpd.conf
 %triggerun -- apache1 < 1.3.37-3, apache1-base
 %webapp_unregister apache %{_webapp}
 
-%triggerin -- apache < 2.2.0, apache-base
+%triggerin -- apache-base
 %webapp_register httpd %{_webapp}
 
-%triggerun -- apache < 2.2.0, apache-base
+%triggerun -- apache-base
 %webapp_unregister httpd %{_webapp}
 
 %triggerin -- lighttpd
