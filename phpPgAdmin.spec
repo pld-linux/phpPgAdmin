@@ -8,7 +8,7 @@ Version:	5.1
 Release:	0.1
 License:	GPL v2+
 Group:		Applications/Databases/Interfaces
-Source0:	http://dl.sourceforge.net/phppgadmin/%{name}-%{version}.tar.bz2
+Source0:	http://downloads.sourceforge.net/phppgadmin/%{name}-%{version}.tar.bz2
 # Source0-md5:	ad8f05cef0c443d9ce2940bf36319c24
 Source1:	%{name}-apache.conf
 Source2:	%{name}-lighttpd.conf
