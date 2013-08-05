@@ -1,5 +1,15 @@
---- phpPgAdmin-4.0.1/libraries/lib.inc.php~	2005-12-02 17:19:47.000000000 +0200
-+++ phpPgAdmin-4.0.1/libraries/lib.inc.php	2005-12-02 17:24:01.259851274 +0200
+diff -ur phpPgAdmin-5.1.orig/libraries/lib.inc.php phpPgAdmin-5.1/libraries/lib.inc.php
+--- phpPgAdmin-5.1.orig/libraries/lib.inc.php	2013-04-14 22:59:58.000000000 +0000
++++ phpPgAdmin-5.1/libraries/lib.inc.php	2013-08-05 07:57:03.087116156 +0000
+@@ -10,7 +10,7 @@
+ 	include_once('./lang/translations.php');
+ 
+ 	// Set error reporting level to max
+-	error_reporting(E_ALL);
++	error_reporting(E_ALL & ~E_NOTICE);
+  
+ 	// Application name
+ 	$appName = 'phpPgAdmin';
 @@ -27,12 +27,12 @@
  		exit(sprintf('Version of PHP not supported. Please upgrade to version %s or later.', $phpMinVer));
  
@@ -15,26 +25,4 @@
 +		echo 'Configuration error: Copy conf/config.inc.php-dist to /etc/webapps/phpPgAdmin/config.inc.php and edit appropriately.';
  		exit;
  	}
-
---- phpPgAdmin-4.0.1/classes/plugins/Plugin.php~	2005-06-16 17:40:12.000000000 +0300
-+++ phpPgAdmin-4.0.1/classes/plugins/Plugin.php	2005-12-02 17:25:54.525481589 +0200
-@@ -21,7 +21,7 @@
- 		// Read in configuration
- 		if ($this->config !== null) {
- 			global $conf;
--			include('./conf/' . $name . '.inc.php');			
-+			include('/etc/webapps/phpPgAdmin/' . $name . '.inc.php');			
- 		}
- 	}
  
---- phpPgAdmin-4.0.1/libraries/lib.inc.php	2005-12-02 17:38:56.000000000 +0200
-+++ phpPgAdmin-4.0.1-org/libraries/lib.inc.php	2005-12-02 17:37:20.000000000 +0200
-@@ -10,7 +10,7 @@
- 	include_once('./lang/translations.php');
- 
- 	// Set error reporting level to max
--	error_reporting(E_ALL);
-+	error_reporting(E_ALL & ~E_NOTICE);
-  
- 	// Application name
- 	$appName = 'phpPgAdmin';
