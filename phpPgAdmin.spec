@@ -5,7 +5,7 @@ Summary:	phpPgAdmin - web-based PostgreSQL administration
 Summary(pl.UTF-8):	phpPgAdmin - administracja bazami PostgreSQL przez WWW
 Name:		phpPgAdmin
 Version:	5.1
-Release:	0.1
+Release:	0.2
 License:	GPL v2+
 Group:		Applications/Databases/Interfaces
 Source0:	http://downloads.sourceforge.net/phppgadmin/%{name}-%{version}.tar.bz2
@@ -16,8 +16,7 @@ Source3:	http://www.quarto.pl/~gotar/%{name}-jscalendar.tar.bz2
 # Source3-md5:	84115f772a723cc742352c589df9af29
 Source4:	%{name}-httpd.conf
 Patch0:		%{name}-config.patch
-#Patch1:	%{name}-adodb.patch
-Patch2:		%{name}-calendar.patch
+Patch1:		%{name}-calendar.patch
 URL:		http://phppgadmin.sourceforge.net/
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(triggerpostun):	sed >= 4.0
@@ -51,24 +50,19 @@ przełączniki, widoki i funkcje (procedury składowane).
 %prep
 %setup -q -a3
 %patch0 -p1
-#%patch1 -p1
-%patch2 -p1
+%patch1 -p1
 mv conf/config.inc.php{-dist,}
 find . -name \*.orig -exec rm -f \{\} \;
 
-# remove language source files (or one wants to make -devel subpackage?)
-mv -f lang/translations.php .
-rm -f lang/*.php
-rm -f lang/{Makefile,synch,php2po,po2php,langcheck,convert.awk}
-mv -f translations.php lang/translations.php
-rm -f lang/recoded/README
+# remove scripts used by translators
+rm -f lang/{langcheck,synch}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_appdir},%{_sysconfdir}}
 
 cp -a *.php *.txt *.js $RPM_BUILD_ROOT%{_appdir}
-cp -a classes help images js lang libraries themes xloadtree $RPM_BUILD_ROOT%{_appdir}
+cp -a classes help images js lang libraries plugins themes xloadtree $RPM_BUILD_ROOT%{_appdir}
 cp -a conf/*.php $RPM_BUILD_ROOT%{_sysconfdir}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/apache.conf
