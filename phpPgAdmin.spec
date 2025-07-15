@@ -49,8 +49,8 @@ przełączniki, widoki i funkcje (procedury składowane).
 
 %prep
 %setup -q -a3
-%patch0 -p1
-%patch1 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 mv conf/config.inc.php{-dist,}
 find . -name \*.orig -exec rm -f \{\} \;
 
